@@ -1,4 +1,4 @@
-"use client" //서버측, 클라이언트측 1번씩 총 2번 실행
+"use client" //서버측, 클라이언트측 1번씩 총 2번 실행: 자바사크릅트의 기능을 활용해서 상호작용 하는 경우에만 클라이언트 서버로 실행
 import { useEffect } from "react";
 import styles from "./page.module.css";
 
