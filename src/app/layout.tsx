@@ -30,3 +30,6 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+//모든 페이지에 적용되는 기초 레이아웃
