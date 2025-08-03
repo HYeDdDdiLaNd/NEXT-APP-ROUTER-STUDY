@@ -1,8 +1,11 @@
+
 import { ReactNode } from "react";
+import Seachbar from './Seachbar'
+
 const Layout = ({children} : {children: ReactNode}) => {
     return( 
     <div>
-        <div>임시 서치바</div>
+        <Seachbar></Seachbar>
         {children}
     </div>
     )
