@@ -1,14 +1,20 @@
 'use client' //자바스크립트로 상호작용해야하기 때문에 클라이언트 컴포넌트로 선언한다.
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
 const Searchbar = () => {
     const [search, setSearch] = useState('');
     const onchangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
     }
+
+    const route = useRouter();
+
+    const onclickSubmit = () => {
+        route.push(`/search?q=${search}`); //페이지를 이동시킨다.
+    }
     return <div>
         <input type="text" name="search" id="search" value={search} onChange={onchangeSearch}/>
-     <button type="button">검색</button>
+     <button type="button" onClick={onclickSubmit}>검색</button>
     </div>
 }
 

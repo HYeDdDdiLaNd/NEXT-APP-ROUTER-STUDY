@@ -1,6 +1,6 @@
 
 import { ReactNode } from "react";
-import Seachbar from './Seachbar'
+import Seachbar from '../component/Seachbar'
 
 const Layout = ({children} : {children: ReactNode}) => {
     return( 
