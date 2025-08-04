@@ -1,14 +1,15 @@
-
 import { ReactNode } from "react";
-import Seachbar from '../component/Seachbar'
+import Searchbar from "../../components/searchbar";
 
-const Layout = ({children} : {children: ReactNode}) => {
-    return( 
+export default function Layout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  return (
     <div>
-        <Seachbar></Seachbar>
-        {children}
+      <Searchbar />
+      {children}
     </div>
-    )
+  );
 }
-
-export default Layout;

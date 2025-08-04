@@ -1,18 +1,50 @@
+import BookItem from "@/components/book-item";
+import style from "./page.module.css";
+import books from "@/mock/books.json";
+import { BookData } from "@/types";
 
-import styles from "./page.module.css";
+//두번 데이터를 불러와야할 때에는 컴포넌트를 따로 만든다.
+
+async function AllBooks() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`);//환경변수에서 불러오기
+  if(!response.ok) return <div>이상이 생겨버림.</div>;
+
+  const allBooks:BookData[] = await response.json();
+  return (
+    <div>
+      {allBooks.map((book) => (<BookItem key={book.id} {...book} />))}
+    </div>
+  )
+}
+
+async function RecoBooks() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`);
+  if(!response.ok) return <div>여기두 이상이 생겨버림.</div>;
+
+  const randomBooks:BookData[] = await response.json();
+
+  return (
+    <div>
+      {randomBooks.map((book) => (<BookItem key={book.id} {...book} />))}
+    </div>
+  )
+}
 
 export default function Home() {
+
+  
+
+
   return (
-    <div className={styles.page}>
-     잉덱스임
+    <div className={style.container}>
+      <section>
+        <h3>지금 추천하는 도서</h3>
+        <RecoBooks />
+      </section>
+      <section>
+        <h3>등록된 모든 도서</h3>
+        <AllBooks />
+      </section>
     </div>
   );
 }
-
-
-//특정 페이지만 제외하고 공통적인 레이아웃을 사용하는 route group
-// () 사용해서 폴더를 만들고 공통적으로 레이아웃을 적용할 page.tsx 파일이나 폴더를 
-//라우트 앱으로 지정해놓은 파일에 이동하고,
-//라우트 앱 바로 하위에 layout 파일을 생성하면 
-//라우트 앱 하위에 만들어진 layout을 기반으로
-//해당 폴더에 있는 페이지들이 공통적인 layout을 갖는다.
