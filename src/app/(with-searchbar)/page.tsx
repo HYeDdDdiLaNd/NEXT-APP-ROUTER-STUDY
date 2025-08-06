@@ -18,7 +18,7 @@ async function AllBooks() {
 }
 
 async function RecoBooks() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`, {cache: 'force-cache'});
   if(!response.ok) return <div>여기두 이상이 생겨버림.</div>;
 
   const randomBooks:BookData[] = await response.json();
