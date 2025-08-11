@@ -1,5 +1,12 @@
-import { BookData } from "@/types";
-import style from "./page.module.css";
+import { BookData } from '@/types';
+import style from './page.module.css';
+import { notFound } from 'next/navigation';
+
+export const dynamicParams =
+  false; /* 아래에 정의된 정적 params 외에는 다 404로 보내버림: 이 페이지는 동적이면 안되는구나로 인식함.*/
+export function generateStaticParams() {
+  return [{ id: '1' }, { id: '2' }, { id: '3' }]; //사전에 미리 렌더링해서 정적페이지로 만들어놀음.
+}
 
 export default async function Page({
   params,
@@ -8,11 +15,19 @@ export default async function Page({
 }) {
   const { id } = await params;
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`);
-  if(!response.ok) return <div>오류 여기두....</div>
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`
+  );
+  if (!response.ok) {
+    if (response.status === 404) {
+      notFound();
+    }
+    return <div>오류 여기두....</div>;
+  }
 
-  const bookData:BookData = await response.json();
-  const { title, subTitle, description, author, publisher, coverImgUrl } = bookData;
+  const bookData: BookData = await response.json();
+  const { title, subTitle, description, author, publisher, coverImgUrl } =
+    bookData;
 
   return (
     <div className={style.container}>
