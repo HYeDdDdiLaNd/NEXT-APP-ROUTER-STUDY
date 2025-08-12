@@ -2,8 +2,7 @@ import { BookData } from '@/types';
 import style from './page.module.css';
 import { notFound } from 'next/navigation';
 
-export const dynamicParams =
-  false; /* 아래에 정의된 정적 params 외에는 다 404로 보내버림: 이 페이지는 동적이면 안되는구나로 인식함.*/
+// /export const dynamicParams =false; /* 아래에 정의된 정적 params 외에는 다 404로 보내버림: 이 페이지는 동적이면 안되는구나로 인식함.*/
 export function generateStaticParams() {
   return [{ id: '1' }, { id: '2' }, { id: '3' }]; //사전에 미리 렌더링해서 정적페이지로 만들어놀음.
 }
