@@ -5,6 +5,7 @@ import { BookData } from '@/types';
 import delay from '@/util/delay';
 import { Suspense } from 'react';
 import BookListSkeleton from '@/components/skeleton/book-list-skeleton';
+import { Metadata } from 'next';
 
 //특정 페이지의 유형을 강제로 static, dynamic 페이지로 설정
 //1. auto: 기본값, 아무것도 강제로 하지 않음.
@@ -13,8 +14,12 @@ import BookListSkeleton from '@/components/skeleton/book-list-skeleton';
 //4. error: 페이지를 강제로 static 페이지로 설정 (설정하면 안되는 이유 - 빌드타임에 에러를 발생시킨다.)
 export const dynamic = 'auto';
 
+export const metadata: Metadata = {
+  title: '~~',
+  description: '~~',
+  openGraph: {},
+};
 //두번 데이터를 불러와야할 때에는 컴포넌트를 따로 만든다.
-
 async function AllBooks() {
   await delay(3500);
   const response = await fetch(

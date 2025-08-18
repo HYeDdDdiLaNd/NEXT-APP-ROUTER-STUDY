@@ -1,5 +1,24 @@
 import BookItem from '@/components/book-item';
 import { BookData } from '@/types';
+import { title } from 'process';
+import { Metadata } from 'next';
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}): Promise<Metadata> {
+  //현재 페이지에 메타 데이터를 동적으로 생성하는 역할을 함.
+  const { q } = await searchParams;
+  return {
+    title: `${q} : 한입북스 검색`,
+    description: `${q}의 검색 결과`,
+    openGraph: {
+      title: `${q}: 한입북스 검색`,
+      description: `${q}: 한입북스 검색결과 입니다.`,
+    },
+  };
+}
 
 export default async function Page({
   searchParams,
